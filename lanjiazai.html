@@ -1,0 +1,61 @@
+<!DOCTYPE=html>  
+<html>  
+<head>  
+<script src="jquery-2.1.1.min.js" type="text/javascript"></script>  
+</head>  
+<body>  
+    <div>下拉加载更多</div>  
+    <div class="main" style="height:700px;overflow:auto;">  
+        <div class="child" style='border:1px solid red;margin-top:20px;color:grey;height:800px' ></div>  
+    </div>  
+</body>  
+<script  type="text/javascript"> 
+
+$(document).ready(function(){  
+    // $(".main").off("scroll").on("scroll", function(e){  
+    //     var sum = this.scrollHeight;  
+    //     if (sum <= $(this).scrollTop() + $(this).height()) {  
+    //         $.ajax({
+    //             url: url,
+    //             data: parames,
+    //             success: function(){
+
+    //             },
+    //             error: function(){
+                    
+    //             }
+    //         })
+    //         $(".main").append($(".child").clone());  
+    //     }  
+    // });
+    //下拉加载的封装
+    function load (selector,url,method,callBack){
+        $(selector).scroll(function(e){
+            var sum = this.scrollHeight;
+            var pageNum = $(selector).attr('pageNum');
+            if (sum <= $(this).scrollTop() + $(this).height()) {
+                    console.log(5555)
+                $.ajax({
+                    url: url,
+                    type: method,
+                    data: {page: pageNum, offset: 10},
+                    success: function(res){
+                        callBack(res)
+                    },
+                    error: function(error){
+                        callBack(error)
+                    }
+                })
+
+            }
+
+        })
+    }
+    loading(".main",'http://localhost:85/gethomedata','get',{type:'hot'},function(res){
+        console.log(res.movies)
+        var str = '';
+
+    })  
+});  
+</script>  
+</html>  

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style>
+		.label-parent {
+		  display:table;
+		  height: 40px;
+		  line-height: 40px;
+		  font-size: 20px;
+		  border: 1px solid #000;
+		  -webkit-transform: scale(0.5);
+		  transform: scale(0.5);
+		  -webkit-transform-origin: 100% 100%;
+		  transform-origin: 100% 100%;
+		  padding: 0 8px;
+		}
+		.label {
+		  display: table-cell;
+		  vertical-align:middle;
+		} 
+	</style>
+	<script src="./js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<form enctype="multipart/form-data" method="post" name="fileinfo">
+	  <label>Your email address:</label>
+	  <input type="email" autocomplete="on" autofocus name="userid" placeholder="email" required size="32" maxlength="64" /><br />
+	  <label>Custom file label:</label>
+	  <input type="text" name="filelabel" size="12" maxlength="32" /><br />
+	  <label>File to stash:</label>
+	  <input type="file" name="file" required />
+	  <input type="submit" value="提交" />
+	</form>
+	<div></div>
+	<div class="label-parent">
+	  <p class="label">你是谁</p>
+	</div>
+	<input type="file" name="pic" id="pic" accept="image/gif, image/jpeg" />
+
+	<div>
+		<label for="video">vip视频地址</label>
+		<input type="text" name="video" onchange="getMovie()" class="video"/>
+		<p><a class="btn" href="#" target="_blank">确认</a></p>
+	</div>
+</body>
+<script>
+	 //服务端代理ajax 封装
+	function http(url, opt, type, callback){
+		var parameStr = '' ;
+		for(key in opt){
+			parameStr += (key + ';' + opt[key] + ';')
+		}
+		console.log(parameStr)
+		var parames = '&url=' + url +'&option=' + parameStr +'&type=' + type
+		var status=[200,304]
+	    var xhr=new XMLHttpRequest();
+	    var option = JSON.stringify(parames)
+	    xhr.onload=function(){
+	        if(status.includes(xhr.status)){
+	        	console.log(xhr.responseText)
+	            var data=JSON.parse(xhr.responseText);
+	            callback(data)
+	        }
+	    }
+	    
+	    xhr.open('post','http://localhost:9080/sdk/float/user/gift/add', true);
+	    xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");  
+	    xhr.send(option);
+	}
+	http('http://v8h5m.1tsdk.com/h5m.php/wap/game/list',{is_new: 2,format: 'json'},'post',function(res){
+		console.log(res)
+	});
+	function getMovie (){
+		var $value = document.querySelector('.video').value;
+	
+		$('.btn').attr({'href': 'http://yun.odflv.com/?url=' + $value });
+	}
+	
+
+	//formData上传文件
+	
+	//获取form表单
+	var form = document.forms.namedItem("fileinfo");
+	form.addEventListener('submit', function(ev) {
+
+	  var oOutput = document.querySelector("div"),
+	      oData = new FormData(form);
+
+	  oData.append("CustomField", "This is some extra data");
+
+	  var oReq = new XMLHttpRequest();
+	  oReq.open("POST", "http://284api.1tsdk.com/float.php/Mobile/User/sendPortrait.html", true);
+	  oReq.onload = function(oEvent) {
+	    if (oReq.status == 200) {
+	      oOutput.innerHTML = "上传成功";
+	    } else {
+	      oOutput.innerHTML = "Error " + "上传失败";
+	    }
+	  };
+
+	  oReq.send(oData);
+	  ev.preventDefault();
+	}, false);
+	
+	
+</script>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<link rel="stylesheet" href="">
+	<script src="../js/jquery-2.1.1.min.js"></script>
+	<style>	
+		input[disabled]{color:#fff;opacity:1}
+	</style>
+</head>
+<body>
+	<button onclick="test()">request</button>
+	<input type="text" disabled="disabled"><br>
+	<input type="text" disabled="disabled">
+</body>
+<script>
+	function test(){
+		var data = JSON.stringify({'a': 'b','age': 18});
+		var _data = {'name':'zhangh','gender': 'man','data': data}
+		var _sign = '';
+		for(x in _data){
+            _sign += x + '=' +  encodeURI(_data[x]) + '&';	
+    	};
+    	var sign = _sign.slice(0,-1);
+			$.ajax({
+					url: 'test.php',
+					type: 'post',
+					data: {'name':'zhangh','gender': 'man','data': data,'sign': sign },
+					dataType: 'json',
+					success:function(res){
+						console.log(res);
+					}
+				});
+		
+	}
+
+</script>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+    <meta charset="utf-8" />
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+    
+    <script>
+        /**
+          * 下载文件 - 带进度监控
+          * @param url: 文件请求路径
+          * @param params: 请求参数
+          * @param name: 保存的文件名
+          * @param progress: 进度处理回调函数
+          * @param success: 下载完成回调函数
+          * eg: progressDownLoad({url:'http://loacalhost:8080/downLoad.action',name:'file.rar',progress:function(evt){
+          *        console.log(evt);
+          *     }});
+          **/
+          function progressDownLoad({url,filename,params,progress,success}){
+              var xhr = new XMLHttpRequest();
+              xhr.open("POST", url, true);
+              //监听进度事件
+              xhr.addEventListener("progress", function (evt) {
+                  if(progress) try{ progress.call(evt); }catch(e){}
+              }, false);
+
+              xhr.responseType = "blob";
+              xhr.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=UTF-8");
+              xhr.onreadystatechange = function () {
+                  if (xhr.readyState === 4 && xhr.status === 200) {
+                      if (typeof window.chrome !== 'undefined') {
+                          // Chrome version
+                          var link = document.createElement('a');
+                          link.href = window.URL.createObjectURL(xhr.response);
+                          link.download = filename;
+                          link.click();
+                      } else if (typeof window.navigator.msSaveBlob !== 'undefined') {
+                          // IE version
+                          var blob = new Blob([xhr.response], { type: 'application/force-download' });
+                          window.navigator.msSaveBlob(blob, filename);
+                      } else {
+                          // Firefox version
+                          var file = new File([xhr.response], filename, { type: 'application/force-download' });
+                          window.open(URL.createObjectURL(file));
+                      }
+                      if(success) try{ success.call(xhr); }catch(e){}
+                  }
+              };
+              // FormData
+              //var formData = new FormData();
+              var paramsStr = '';
+              if(params) for (var key in params) paramsStr += '&'+key+'='+params[key];
+              if(paramsStr) paramsStr = paramsStr.substring(1);
+
+              xhr.send(paramsStr);
+          }
+
+          progressDownLoad({url:'http://localhost:85/download',filename:'a.zip',params:{name: 'a.zip',dir: './test/'},progress:function(evt){
+                console.log(evt)
+          },success: function(res){
+            console.log(res)
+
+          }})
+
+    </script>
+</body>
+</html>

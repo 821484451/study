@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title></title>
+	<link rel="stylesheet" href="../css/bootstrap.css">
+
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		html,body{
+			width:100%;
+			height: 100%;
+		}
+		input{
+			outline: none;
+			border: none;
+		}
+		@media screen and (min-width: 720px){
+			.chat{
+				width: 100%;
+				height: 100%;
+				background-color:#00FFFF;
+				position: relative;
+			}
+			.loginBox{
+				width: 400px;
+				height: 300px;
+				position:absolute;
+				left: 50%;
+				margin-left: -200px;
+				top: 50%;
+				margin-top: -150px;
+				background-color: #fff;
+				border-radius: 10px;
+				padding: 20px;
+			}
+			.chatRoom{
+				position: absolute;
+				width: 500px;
+				height: 500px;
+				left: 50%;
+				top: 50%;
+				margin-left: -250px;
+				margin-top: -250px;
+				display: flex;
+				flex-direction: column;
+				display: none;
+				border: 1px solid #ccc;
+				padding: 10px;
+			}
+			.msgList{
+				flex: 1;
+				overflow-x: hidden;
+			}
+			.inputBox{
+				height: 30px;
+			}
+			.chatRoomBg{
+				width: 100%;
+				height: 100%;
+				background-color: #fff;
+				position: absolute;
+				display: none;
+			}
+			.chatRoomBg>h4{
+				text-align: center;
+			}
+		}
+		@media screen and (max-width: 720px){
+			.chat{
+				width: 100%;
+				height: 100%;
+			}
+			.loginBox{
+				width: 100%;
+				height: 100%;
+				background: url('./images/timg.jpg') no-repeat;
+				background-size: cover;
+				position: relative;
+			}
+			form{
+				position: absolute;
+				top: 50%;
+				left: 20px;
+				right: 20px;
+				height: 182px;
+				margin-top: -91px;
+			}
+			.chatRoomBg{
+				display: none;
+				flex-direction: column;
+				width: 100%;
+				height: 100%;
+			}
+			.chatRoomBg_header{
+				height: 50px;
+				background-color: #36B7D0;
+				color: #fff;
+				text-align: center;
+				line-height: 50px;
+				margin:0;
+			}
+			.chatRoom{
+				flex: 1;
+				background-color: #000;
+				display: flex;
+				flex-direction: column;
+			}
+			.inputBox{
+				height: 50px;
+				display: flex;
+				margin: 0;
+				color: #fff;
+			}
+			#mesBox{
+				width: 70%;
+				color: #000;
+				text-indent: 10px;
+			}
+			.btn2{
+				width: 30%;
+				background-color: #36B7D0;
+			}
+			.msgList{
+				width: 100%;
+				height: 100%;
+				overflow-x: hidden;
+				padding: 0 20px;
+
+			}
+			.msgList>p{
+				color: #fff;	
+			}
+			.msgList>.self>span{
+				display: inline-block;
+				color: #fff;
+				padding: 0 20px;
+				line-height: 40px;
+				background-color: rgb(255, 0, 221);
+				border: 1px solid rgb(255, 0, 221);
+				border-radius: 5px;
+				margin-top: 30px;
+
+			}
+			.msgList>.others>span{
+				display: inline-block;
+				color: #fff;
+				padding: 0 20px;
+				line-height: 40px;
+				background-color:#58bc58;
+				border: 1px solid #58bc58;
+				border-radius: 5px;
+				margin-top: 30px;
+
+			}
+	
+		}
+	</style>
+	<script src="../js/jquery-2.1.1.min.js"></script>
+</head>
+<body>
+	<div class="chat">
+		<div class="loginBox">
+			<form>
+			  <div class="form-group">
+			    <label for="exampleInputEmail1">账号</label>
+			    <input type="email" class="form-control" id="nickName" placeholder="Email">
+			  </div>
+			  <div class="form-group">
+			    <label for="exampleInputPassword1">密码</label>
+			    <input type="password" class="form-control" id="password" placeholder="Password">
+			  </div> 
+			  <input type="button"  class="btn btn-default" value="登录">
+			</form>
+		</div>
+	</div>
+	<div class="chatRoomBg">
+		<h4 class="chatRoomBg_header">欢迎进入聊天系统</h4>
+		<div class="chatRoom">
+			<div class="msgList">
+			
+			</div>	
+		</div>
+		<p class="inputBox">
+			<input type="text" id="mesBox">
+			<input type="button" class="btn2" onclick= "sendMessage()" value="发送">
+		</p>	
+	</div>
+	
+</body>
+<script>
+	$('.btn').on('click',function(){
+		console.log(6666)
+		$('.chat').hide();
+		$('.chatRoom').css({'display': 'flex'});
+		$('.chatRoomBg').css({'display': 'flex'});
+	});
+	if(!WebSocket){
+	    console.log("您的浏览器不支持WebSocket")
+	    
+	} else{
+		//连接 socket 服务器
+		var socket = new WebSocket('ws://localhost:8080');
+		//监听服务端断开
+		socket.onclose = function(){
+		    alert("服务已断开");
+		    socket = null;
+		};
+		//监听服务端异常
+		socket.onerror = function(){
+		   alert("服务错误");
+		    socket = null;
+		}
+		//监听服务端广播过来的消息
+		socket.onmessage = function(msg){
+		    var msgObj = JSON.parse(msg.data);
+		    if(msgObj.status == 0){
+		        $('<p>' + msgObj.nickname + '[' + msgObj.time + ']退出聊天</p>').appendTo('.msgList');
+		    } else{
+				if(msgObj.nickname !== $('#nickName').val()){
+					$('<p class="others">' + msgObj.nickname + '[' + msgObj.time + ']：<span class="qipao">' + msgObj.message + '</span></p>').appendTo('.msgList');
+				}else{
+					$('<p class="self">' + msgObj.nickname + '[' + msgObj.time + ']：<span class="qipao">' + msgObj.message + '</span></p>').appendTo('.msgList');
+				}
+		        
+		    }
+		}
+	}
+	
+	
+	var sendMessage = function(_mess){
+	    if(socket){
+	        var myDate = new Date();
+	        var now = myDate.getMonth() + '-' + myDate.getDate() + ' ' + myDate.getHours() + ':' + myDate.getMinutes() + ':' + myDate.getSeconds();				
+	        
+	        var mesObj = {
+	            nickname: $('#nickName').val(),
+	            message: _mess || $('#mesBox').val(),
+	            time: now
+	        }
+	        //向服务端发送消息
+			socket.send(JSON.stringify(mesObj));
+			$('#mesBox').val('');
+	    }			
+	}
+</script>
+</html>

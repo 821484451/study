@@ -1,0 +1,11 @@
+<?php
+$file = fopen("test/b.txt","r") or exit("无法打开文件!");
+while(!feof($file))
+{
+    echo fgets($file). "<br>";
+}
+fclose($file);
+var_dump($file);
+echo date("Y-m-d-g");
+
+?>

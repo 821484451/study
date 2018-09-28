@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title></title>
+	<script src="./js/jquery-2.1.1.min.js"></script>
+	<script src="common.js"></script>
+	<link rel="stylesheet" href="./css/tab.css"/>
+	<style>
+		html,body{
+			width: 100%;
+			height: 100%;
+		}
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		ul,li{
+			list-style: none;
+		}
+		a{
+			text-decoration: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="banner">
+		<ul>
+			<li><img src="images/1.jpg" alt=""></li>
+			<li><img src="images/2.jpg" alt=""></li>
+			<li><img src="images/3.jpg" alt=""></li>
+			<li><img src="images/4.jpg" alt=""></li>
+			<li><img src="images/5.jpg" alt=""></li>
+			<li><img src="images/1.jpg" alt=""></li>
+		</ul>
+	</div>
+	<div class="footer">
+		<a class="active" href="#"><img class="default" src="images/tab_home_default.png" alt=""><img class="selected" src="images/tab_home_select.png" alt=""><span>首页</span></a>
+		<a href="#"><img class="default" src="images/tab_jiaoyi_default.png" alt=""><img class="selected" src="images/tab_jiaoyi_selected.png" alt=""><span>交易</span></a>
+		<a href="#"><img class="default" src="images/tab_kaifu_default.png" alt=""><img class="selected" src="images/tab_kaifu_selected.png" alt=""><span>开服</span></a>
+		<a href="#"><img class="default" src="images/tab_paihang_default.png" alt=""><img class="selected" src="images/tab_paihang_selected.png" alt=""><span>排行</span></a>	
+	</div>
+</body>
+<script>
+	$(banner('.banner', 3000, '100%', '300px'));
+	$(function() {
+		$('.footer').find('a').on('click',function(event){
+			$('.footer').find('a').removeClass('active');
+			$(this).addClass('active');
+		})
+		
+	});
+	
+</script>
+</html>
