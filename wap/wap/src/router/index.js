@@ -336,29 +336,29 @@ const router = new Router({
   ]
 })
 
-router.beforeEach((to, from, next) => {
-  // store.commit('UPDATE_LOADING_STATUS', {'isLoading': true})
-  store.commit('UPDATE_SEARCH_STATUS', {'searchFlag': true})
-  let token = parseInt(window.sessionStorage.getItem('user_id')) || 0
+// router.beforeEach((to, from, next) => {
+//   // store.commit('UPDATE_LOADING_STATUS', {'isLoading': true})
+//   store.commit('UPDATE_SEARCH_STATUS', {'searchFlag': true})
+//   let token = parseInt(window.sessionStorage.getItem('user_id')) || 0
 
-  if (to.name === 'Login') {
-    if (token > 0) {
-      store.commit('UPDATE_LOGIN_STATUS', {'loginStatus': true})
-      next({path: '/'})
-    } else {
-      store.commit('UPDATE_LOGIN_STATUS', {'loginStatus': false})
-      next()
-    }
-  } else if (to.name === 'Forgetpwd') {
-    next()
-  } else {
-    if (token > 0) {
-      next()
-    } else {
-      next({path: '/login'})
-    }
-  }
-})
+//   if (to.name === 'Login') {
+//     if (token > 0) {
+//       store.commit('UPDATE_LOGIN_STATUS', {'loginStatus': true})
+//       next({path: '/'})
+//     } else {
+//       store.commit('UPDATE_LOGIN_STATUS', {'loginStatus': false})
+//       next()
+//     }
+//   } else if (to.name === 'Forgetpwd') {
+//     next()
+//   } else {
+//     if (token > 0) {
+//       next()
+//     } else {
+//       next({path: '/login'})
+//     }
+//   }
+// })
 router.afterEach(function (to) {
   // store.commit('UPDATE_LOADING_STATUS', {isLoading: false})
 })

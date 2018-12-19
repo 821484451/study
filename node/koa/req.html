@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="koaPost()">post请求测试koa</button>
+    <button onclick="expressPost()">post请求测试express</button>
+    <button onclick="koaGet()">get请求测试koa</button>
+    <button onclick="expressGet()">get请求测试express</button>
+</body>
+<script>
+    var formData = new FormData();
+    formData.append('username', '张三');
+    formData.append('email', 'zhangsan@example.com');
+    formData.append('birthDate', 1940);
+    var email = '731010519@qq.com';
+    var password = 'zhangjijixng';
+    var data = 'email='
+    + encodeURIComponent(email)
+    + '&password='
+    + encodeURIComponent(password);
+
+    function koaPost () {
+        console.log('koa请求');
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', 'http://localhost:3000/test',true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(data);
+    }
+    function expressPost () {
+        console.log('express请求');
+        var xhr = new XMLHttpRequest();
+        xhr.open('post', 'http://localhost:3001/test',true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.send(data);
+    }
+    function koaGet () {
+        console.log('koa请求');
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', 'http://localhost:3000/test?username=zhang&password=123456',true);
+        xhr.send();
+    }
+    function expressGet () {
+        console.log('express请求');
+        var xhr = new XMLHttpRequest();
+        xhr.open('get', 'http://localhost:3001/test?username=zhang&password=123456',true);
+        xhr.send();
+    }
+    
+</script>
+</html>
