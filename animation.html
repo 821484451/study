@@ -28,7 +28,11 @@
 			0% {transform: rotateY(0deg);transform-origin: 50% 50% 0;}
 			100% {transform: rotateY(1440deg);transform-origin: 50% 50% 0;}
 		}
-
+		@keyframes  myAnimation1 
+		{
+			0% {transform: rotateZ(0deg);}
+			100% {transform: rotateZ(360deg);}
+		}
 		.box{
 			animation-name: myAnimation;
 			animation-duration: 5s;
@@ -55,7 +59,80 @@
 			animation-play-state: running;
 
 		}
-		
+		.taiJi{
+			width: 300px;
+			height: 300px;
+			border-radius: 50%;
+			background-color: #fff;
+			position: relative;
+
+			animation-name: myAnimation1;
+			animation-duration: 2s;
+			animation-timing-function: linear;
+			animation-delay: 0s;
+			animation-iteration-count: infinite;
+			animation-direction: alternate;
+			animation-play-state: running;
+		}
+		.yin{
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 150px;
+			height: 300px;
+			border-top-left-radius:150px;
+			border-bottom-left-radius:150px;
+			background-color: #000;
+		}
+		.yang{
+			position: absolute;
+			right: 0;
+			top: 0;
+			width: 150px;
+			height: 300px;
+			border-top-right-radius:150px;
+			border-bottom-right-radius:150px;
+			background-color: #fff;
+		}
+		.yinBox{
+			width: 150px;
+			height: 150px;
+			background-color: #fff;
+			position: absolute;
+			top: 0;
+			right: -75px;
+			border-radius: 50%;
+		}
+		.yinYan{
+			width: 75px;
+			height: 75px;
+			border-radius: 50%;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform:translate(-50%,-50%);
+			background-color: #000;
+			z-index: 1;
+		}
+		.yangBox{
+			width: 150px;
+			height: 150px;
+			background-color: #000;
+			position: absolute;
+			bottom: 0;
+			left: -75px;
+			border-radius: 50%;
+		}
+		.yangYan{
+			width: 75px;
+			height: 75px;
+			border-radius: 50%;
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform:translate(-50%,-50%);
+			background-color: #fff;
+		}
 	</style>
 </head>
 <body>
@@ -71,14 +148,18 @@
 		<div class="front">front</div>
 		<div class="back">back</div>
 	</div>
-	<div class="sixAngle">
-		<div class="one">one</div>
-		<div class="two">two</div>
-		<div class="three">three</div>
-		<div class="four">four</div>
-		<div class="five">five</div>
-		<div class="six">six</div>		
-	</div>
+	<div class="taiJi">	
+		<div class="yin">
+			<div class="yinBox">	
+				<p class="yinYan">	</p>
+			</div>
+		</div>
+		<div class="yang">	
+				<div class="yangBox">
+					<p class="yangYan">	</p>
+				</div>
+		</div>
+	</div>			
 	
 </body>
 <script>

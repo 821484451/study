@@ -1,0 +1,59 @@
+@keyframes  circle2 
+{
+	0% {transform: rotate3d(150,150, 150,0deg);transform-origin: 50% 50% 0;}
+	50% {transform: rotate3d(150,150, 150,360deg);transform-origin: 50% 50% 0;}
+	100% {transform: rotate3d(150,150, 150,720deg);transform-origin: 50% 50% 0;}
+}
+
+.cube{
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -150px;
+	margin-top: -150px;
+	transform: perspective(500px);
+	transform-style: preserve-3d;
+
+	animation-name: circle2;
+	animation-duration: 5s;
+	animation-timing-function: linear;
+	animation-delay: 0s;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-play-state: running;
+}
+.cube > div{
+	width: 300px;
+	height: 300px;
+	position: absolute;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+}
+.front{
+	transform: translateZ(150px);
+	background: rgba(0,255,255,0.5);
+}
+.back{
+	transform: translateZ(-150px);
+	background: rgba(0,255,0,0.5);
+}
+.left{
+	transform: translateX(-150px) rotateY(-90deg);
+	background: rgba(255,0,0,0.5);
+}
+.right{
+	transform: translateX(150px) rotateY(-90deg);
+	background: rgba(255,0,255,0.5);
+}
+.top{
+	transform: translateY(-150px) rotateX(90deg);
+	background: rgba(0,0,255,0.5);
+}
+.bottom{
+	transform: translateY(150px) rotateX(90deg);
+	background: rgba(255,255,255,0.5);
+}
