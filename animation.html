@@ -5,7 +5,8 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
 	<title></title>
-	<script src="jquery-2.1.1.min.js"></script>
+	<script src="./js/jquery-2.1.1.min.js"></script>
+	<script src="./common.js"></script>
 	<link rel="stylesheet" href="./css/cube.css">
 	<style>
 		html,body{
@@ -133,6 +134,13 @@
 			transform:translate(-50%,-50%);
 			background-color: #fff;
 		}
+		.smallBox{
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			left: 0;
+			top: 0;
+		}
 	</style>
 </head>
 <body>
@@ -160,8 +168,11 @@
 				</div>
 		</div>
 	</div>			
-	
 </body>
+<script src="pointer.js"></script>
 <script>
+	var a = new pointer(50);
+	console.log(a);
+	a.init(); 
 </script>
 </html>

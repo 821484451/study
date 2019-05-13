@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style type="text/css" media="screen">
+		div{
+			float: left;
+		}
+		div>img{
+			width: 100%;
+			height: 100%;
+		}
+		.testBox{
+			width: 200px;
+			height: 200px;
+			background-color: blue;
+			animation:test 2s infinite;
+		}
+		.testBox1{
+			width: 200px;
+			height: 200px;
+			background-color: red;
+			animation:test1 2s infinite;
+		}
+		.testBox2{
+			width: 200px;
+			height: 400px;
+			background-color: green;
+			animation:test2 2s infinite;
+		}
+		.testBox3{
+			width: 200px;
+			height: 200px;
+			background-color: red;
+			animation:test3 2s infinite;
+			/*clip-path: polygon(50% 0, 86.3% 100%, 0% 34%, 100% 34%, 13.7% 100%);*/
+		}
+		.shapeBox{
+			width: 200px;
+			height: 200px;
+			shape-outside: circle(50%);
+		}
+		@keyframes test{
+			from {clip-path: circle(0%);}
+			to{clip-path: circle(100%);}
+		}
+		@keyframes test1{
+			from {clip-path: ellipse(10px 5px at 50% 50%);}
+			to{clip-path: ellipse(400px 200px at 50% 50%);}
+		}
+		@keyframes test2{
+			from {clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);}
+			to{clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);}
+		}
+		@keyframes test3{
+			10% {clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%,50% 50%);}
+			50% {clip-path: polygon(50% 0, 86.3% 100%, 0% 34%, 100% 34%, 13.7% 100%);}
+			100% {clip-path: polygon(50% -200%, 431.5% 500%, -200% 170%, 200% 170%, -131.5% 500%);}
+		}
+	</style>
+</head>
+<body>
+	<div class="testBox">
+		<img src="./images/lyf.jpg" alt="">
+	</div>
+	<div class="testBox1">
+		<img src="./images/lyf.jpg" alt="">
+	</div>
+	<div class="testBox2">
+		<img src="./images/lyf.jpg" alt="">
+	</div>
+	<div class="testBox3">
+		<img src="./images/lyf.jpg" alt="">
+	</div>
+	<div class="shapeBox">
+		<img src="./images/lyf.jpg" alt="">
+	</div>
+	<div class="shapeBox1">
+		<img src="./images/lyf.jpg" alt="">
+	</div>
+	<div class="shapeBox2">
+		<img src="./images/lyf.jpg" alt="">
+	</div>
+</body>
+</html>

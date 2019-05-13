@@ -23,7 +23,9 @@
 			border-radius: 50%;
 			left: 50%;
 			top: 50%;
-			transform: translate(-50%,-50%);
+			margin-left: -400px;
+			margin-top: -400px;
+			transform:rotateX(-50deg);
 		}
 		.vernus>div{
 			position: absolute;
@@ -31,7 +33,6 @@
 			border: 1px solid #fff;
 			left: 50%;
 			top: 50%;
-			transform: translate(-50%,-50%);
 		}
 		.vernus>div>i{
 			display: block;
@@ -45,44 +46,58 @@
 			top: -10px;
 		}
 		.vernus>div:nth-child(1){
-			width: 700px;
-			height: 700px;
-		}
-		.vernus>div:nth-child(2){
 			width: 600px;
 			height: 600px;
+			margin-left: -300px;
+			margin-top: -300px;
 		}
-		.vernus>div:nth-child(3){
+		.vernus>div:nth-child(2){
 			width: 500px;
 			height: 500px;
+			margin-left: -250px;
+			margin-top: -250px;
 		}
-		.vernus>div:nth-child(4){
+		.vernus>div:nth-child(3){
 			width: 400px;
 			height: 400px;
+			margin-left: -200px;
+			margin-top: -200px;
 		}
-		.vernus>div:nth-child(5){
+		.vernus>div:nth-child(4){
 			width: 300px;
 			height: 300px;
-
+			margin-left: -150px;
+			margin-top: -150px;
 		}
-		.vernus>div:nth-child(6){
+		.vernus>div:nth-child(5){
 			width: 200px;
 			height: 200px;
-		}
-		@keyframes  myAnimation {
-			0% {transform: rotateZ(0deg);}
-			100% {transform: rotateZ(1440deg);}
+			margin-left: -100px;
+			margin-top: -100px;
 		}
 	</style>
 </head>
 <body>
 	<div class="vernus">
-		<div><i></i></div>
-		<div><i></i></div>
-		<div><i></i></div>
-		<div><i></i></div>
-		<div><i></i></div>
-		<div><i></i></div>
+		<div class="vernus_div2"><i></i></div>
+		<div class="vernus_div3"><i></i></div>
+		<div class="vernus_div4"><i></i></div>
+		<div class="vernus_div5"><i></i></div>
+		<div class="vernus_div6"><i></i></div>
 	</div>
 </body>
+<script>
+	function rotate(dom, time){
+		var dom = document.querySelector(dom);
+		var num = 0;
+		setInterval(function(){
+			dom.style.transform =  `rotateZ(${num++}deg)`
+		},time);
+	};
+	rotate('.vernus_div2', 20);
+	rotate('.vernus_div3', 40);
+	rotate('.vernus_div4', 50);
+	rotate('.vernus_div5', 60);
+	rotate('.vernus_div6', 70);
+</script>			
 </html>

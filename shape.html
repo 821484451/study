@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<style type="text/css" media="screen">
+		div{
+		  float:left;
+		  margin:25px;
+		}
+
+		#egg{
+		  display:block;
+		  width:126px;
+		  height:180px;
+		  background-color:blue;
+		  border-radius:50% 50% 50% 50%/60% 60% 40% 40%
+		}
+
+		#pacman{
+		  width:0;
+		  height:0;
+		  border-right:60px solid transparent;
+		  border-left:60px solid red;
+		  border-top:60px solid red;
+		  border-bottom:60px solid red;
+		  border-radius:60px;
+		}
+
+		#talkbubble{
+		  width:120px;
+		  height:80px;
+		  background:green;
+		  position:relative;
+		  border-radius:10px;
+		}
+		#talkbubble:before{
+		  content:"";
+		  position:absolute;
+		  right:100%;
+		  top:26px;
+		  width:0;
+		  height:0;
+		  border-top:13px solid transparent;
+		  border-right:26px solid green;
+		  border-bottom:13px solid transparent;
+		}
+
+		#burst-12{
+		  width:80px;
+		  height:80px;
+		  background:orange;
+		  text-align:center;
+		  position:relative;
+		}
+		#burst-12:before,#burst-12:after{
+		  content:"";
+		  position:absolute;
+		  top:0;
+		  left:0;
+		  width:80px;
+		  height:80px;
+		  background:orange;
+		}
+		#burst-12:before{
+		  -webkit-transform: rotate(30deg);
+		       -moz-transform: rotate(30deg);
+		        -ms-transform: rotate(30deg);
+		         -o-transform: rotate(30deg);
+		}
+		#burst-12:after{
+		  -webkit-transform: rotate(60deg);
+		       -moz-transform: rotate(60deg);
+		        -ms-transform: rotate(60deg);
+		         -o-transform: rotate(60deg);
+		}
+
+		#yin-yang{
+		  width:96px;
+		  height:48px;
+		  background:#eee;
+		  border-color:red;
+		  border-style:solid;
+		  border-width:2px 2px 50px 2px;
+		  border-radius:100%;
+		  position:relative;
+		}
+		#yin-yang:before{
+		  content:"";
+		  position:absolute;
+		  top:50%;
+		  left:0;
+		  background:red;
+		  border:18px solid #eee;
+		  border-radius:100%;
+		  width:12px;
+		  height:12px;
+		}
+		#yin-yang:after{
+		  content:"";
+		  position:absolute;
+		  top:50%;
+		  left:50%;
+		  background:#eee;
+		  border:18px solid red;
+		  border-radius:100%;
+		  width:12px;
+		  height:12px;
+		}
+
+		#badge-ribbon {
+		 position: relative;
+		 background: red;
+		 height: 100px;
+		 width: 100px;
+		 -moz-border-radius:    50px;
+		 -webkit-border-radius: 50px;
+		 border-radius:         50px;
+		}
+		 
+		#badge-ribbon:before,
+		#badge-ribbon:after {
+		  content: '';
+		  position: absolute;
+		  border-bottom: 70px solid red;
+		  border-left: 40px solid transparent;
+		  border-right: 40px solid transparent;
+		  top: 70px;
+		  left: -10px;
+		  -webkit-transform: rotate(-140deg);
+		  -moz-transform:    rotate(-140deg);
+		  -ms-transform:     rotate(-140deg);
+		  -o-transform:      rotate(-140deg);
+		}
+		 
+		#badge-ribbon:after {
+		  left: auto;
+		  right: -10px;
+		  -webkit-transform: rotate(140deg);
+		  -moz-transform:    rotate(140deg);
+		  -ms-transform:     rotate(140deg);
+		  -o-transform:      rotate(140deg);
+		}
+
+		#space-invader{
+		 
+		  box-shadow:
+		    0 0 0 1em red,
+		    0 1em 0 1em red,
+		    -2.5em 1.5em 0 .5em red,
+		    2.5em 1.5em 0 .5em red,
+		    -3em -3em 0 0 red,
+		    3em -3em 0 0 red,
+		    -2em -2em 0 0 red,
+		    2em -2em 0 0 red,
+		    -3em -1em 0 0 red,
+		    -2em -1em 0 0 red,
+		    2em -1em 0 0 red,
+		    3em -1em 0 0 red,
+		    -4em 0 0 0 red,
+		    -3em 0 0 0 red,
+		    3em 0 0 0 red,
+		    4em 0 0 0 red,
+		    -5em 1em 0 0 red,
+		    -4em 1em 0 0 red,
+		    4em 1em 0 0 red,
+		    5em 1em 0 0 red,
+		    -5em 2em 0 0 red,
+		    5em 2em 0 0 red,
+		    -5em 3em 0 0 red,
+		    -3em 3em 0 0 red,
+		    3em 3em 0 0 red,
+		    5em 3em 0 0 red,
+		    -2em 4em 0 0 red,
+		    -1em 4em 0 0 red,
+		    1em 4em 0 0 red,
+		    2em 4em 0 0 red;
+		 
+		    background: red;
+		    width: 1em;
+		    height: 1em;
+		    overflow: hidden;
+		 
+		    margin: 50px 0 70px 65px;
+		  }
+
+		#chevron {
+		  margin-left:100px;
+		  position: relative;
+		  text-align: center;
+		  padding: 12px;
+		  margin-bottom: 6px;
+		  height: 60px;
+		  width: 200px;
+		}
+		 
+		#chevron:before {
+		  content: '';
+		  position: absolute;
+		  top: 0;
+		  left: 0;
+		  height: 100%;
+		  width: 51%;
+		  background: red;
+		  -webkit-transform: skew(0deg, 6deg);
+		  -moz-transform: skew(0deg, 6deg);
+		  -ms-transform: skew(0deg, 6deg);
+		  -o-transform: skew(0deg, 6deg);
+		  transform: skew(0deg, 6deg);
+		}
+		#chevron:after {
+		  content: '';
+		  position: absolute;
+		  top: 0;
+		  right: 0;
+		  height: 100%;
+		  width: 50%;
+		  background: red;
+		  -webkit-transform: skew(0deg, -6deg);
+		  -moz-transform: skew(0deg, -6deg);
+		  -ms-transform: skew(0deg, -6deg);
+		  -o-transform: skew(0deg, -6deg);
+		  transform: skew(0deg, -6deg);
+		}
+
+		#magnifying-glass
+		{
+		 font-size: 10em; /* This controls the size. */
+		 display: inline-block;
+		 width: 0.4em;
+		 height: 0.4em;
+		 border: 0.1em solid red;
+		 position: relative;
+		 border-radius: 0.35em;
+		}
+		#magnifying-glass::before
+		{
+		 content: "";
+		 display: inline-block;
+		 position: absolute;
+		 right: -0.25em;
+		 bottom: -0.1em;
+		 border-width: 0;
+		 background: red;
+		 width: 0.35em;
+		 height: 0.08em;
+		 -webkit-transform: rotate(45deg);
+		    -moz-transform: rotate(45deg);
+		     -ms-transform: rotate(45deg);
+		      -o-transform: rotate(45deg);
+		}
+	</style>
+</head>
+<body>
+	<div id="egg"></div>  
+	<div id="pacman"></div>
+	<div id="talkbubble"></div>
+	<div id="burst-12"></div>
+	<div id="yin-yang"></div>
+	<div id="badge-ribbon"></div>
+	<div id="space-invader"></div>
+	<div id="chevron"></div>
+	<div id="magnifying-glass"></div>
+</body>
+</html>
