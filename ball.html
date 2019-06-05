@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title></title>
+	<script src="./js/jquery-2.1.1.min.js"></script>
+	<script src="./common.js"></script>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		div{
+			width: 100px;
+			height: 100px;
+			background-color: red;
+			/*border-radius: 50%;*/
+			clip-path: polygon(50% 0, 86.3% 100%, 0% 34%, 100% 34%, 13.7% 100%);
+		}
+		html,body{
+			width: 100%;
+			height: 100%;
+			position: relative;
+			background-color: #fff;
+			background-color: #000;
+		}
+		div{
+			position: absolute;
+			left: 0;
+			top: 0;
+
+		}
+	</style>
+</head>
+<body>
+	<div class="ball"></div>
+	<div class="ball1"></div>
+	<div class="ball2"></div>
+	<div class="ball3"></div>
+	<div class="ball4"></div>
+	<div class="ball5"></div>
+	<div class="ball6"></div>
+	<div class="ball7"></div>
+	<div class="ball8"></div>
+	<div class="ball9"></div>
+</body>
+<script>
+	function ball(dom, num){
+		var ball = document.querySelector(dom);
+		
+		var x = 0;
+		var y = 0;
+		var xNum = num;
+		var yNum = num;
+		var color = randomColor();
+		setInterval(function(){
+			var maxX = document.querySelector('body').offsetWidth - 100;
+			var maxY = document.querySelector('body').offsetHeight - 100;
+			x = x + xNum;
+			y = y + yNum;
+			if (x > maxX && xNum > 0){
+				xNum = xNum * -1;
+				x = maxX;
+			};
+			if (y > maxY && yNum > 0){
+				yNum =yNum * -1;
+				y = maxY;
+			};
+			if (x <= 0 && xNum < 0){
+				xNum =xNum * -1;
+				x = 0;
+			};
+			if (y <= 0 && yNum < 0 ){
+				yNum = yNum * -1;
+				y = 0;
+			};
+			ball.style = "left:" + x + 'px;top:' + y + "px;background-color:" + color;
+			
+		},10)
+	}
+	ball('.ball', 2);
+	ball('.ball1', 3);
+	ball('.ball2', 4);
+	ball('.ball3', 1);
+	ball('.ball4', 2.5);
+	ball('.ball5', 5);
+	ball('.ball6', 6);
+	ball('.ball7', 7);
+	ball('.ball8', 8);
+	ball('.ball9', 9);
+
+
+</script>
+</html>
