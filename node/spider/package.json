@@ -10,7 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "cheero": "0.0.1",
-    "express": "^4.16.3",
+    "express": "^4.17.3",
     "request": "^2.87.0",
     "superagent": "^3.8.3"
   }
